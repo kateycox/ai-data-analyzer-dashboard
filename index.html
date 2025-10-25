@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Business Intelligence Dashboard</title>
+<link rel="stylesheet" href="styles/main.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+</head>
+<body>
+<div class="dashboard-container">
+<!-- Header Section -->
+<header class="dashboard-header">
+<div class="header-content">
+<h1>🧠 AI Business Intelligence</h1>
+<p>Ask questions about your data in plain English</p>
+<div class="status-indicator">
+<span class="status-dot active"></span>
+<span>AI Analytics Engine Online</span>
+</div>
+</div>
+</header>
+<!-- Query Interface -->
+<section class="query-section">
+<div class="query-container">
+<div class="query-input-wrapper">
+<input type="text" id="queryInput" placeholder="Ask me anything about
+your business data... (e.g., 'What are our top performing products this quarter?')"
+maxlength="500">
+<button id="analyzeBtn" class="analyze-button">
+<span class="btn-text">Analyze</span>
+<span class="btn-icon">🔍</span>
+</button>
+</div>
+<div class="quick-queries">
+<button class="quick-query-btn" data-query="Show me revenue trends by
+month">📈 Revenue Trends</button>
+<button class="quick-query-btn" data-query="Which products are
+performing best?">🏆 Top Products</button>
+<button class="quick-query-btn" data-query="Analyze customer
+satisfaction scores">😊 Customer Satisfaction</button>
+<button class="quick-query-btn" data-query="Show regional sales
+performance">🌍 Regional Performance</button>
+</div>
+</div>
+</section>
+<!-- Results Section -->
+<section class="results-section">
+<div class="results-container" id="resultsContainer">
+<!-- AI Analysis Results Will Appear Here -->
+<div class="welcome-state">
+<div class="welcome-icon">📊</div>
+<h3>Ready to Analyze Your Data</h3>
+<p>Ask a question above to get AI-powered insights from your business
+data. I can help you understand trends, identify opportunities, and make data-driven
+decisions.</p>
+<div class="sample-insights">
+<h4>Sample Questions You Can Ask:</h4>
+<ul>
+<li>"What's driving our revenue growth this quarter?"</li>
+<li>"Which customer segments are most profitable?"</li>
+<li>"Are there any concerning trends in our data?"</li>
+<li>"What opportunities should we focus on next?"</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Dashboard Metrics -->
+<section class="metrics-section">
+<div class="metrics-grid">
+<div class="metric-card">
+<div class="metric-header">
+<h4>Total Revenue</h4>
+<span class="metric-trend positive">+12.5%</span>
+</div>
+<div class="metric-value" id="totalRevenue">$2.4M</div>
+<div class="metric-subtitle">This Quarter</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<h4>Active Customers</h4>
+<span class="metric-trend positive">+8.3%</span>
+</div>
+<div class="metric-value" id="activeCustomers">15,847</div>
+<div class="metric-subtitle">Monthly Active</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<h4>Avg Order Value</h4>
+<span class="metric-trend negative">-2.1%</span>
+</div>
+<div class="metric-value" id="avgOrderValue">$156</div>
+<div class="metric-subtitle">30-Day Average</div>
+</div>
+<div class="metric-card">
+<div class="metric-header">
+<h4>Customer Satisfaction</h4>
+<span class="metric-trend positive">+0.3</span>
+</div>
+<div class="metric-value" id="customerSat">4.7/5</div>
+<div class="metric-subtitle">Average Rating</div>
+</div>
+</div>
+</section>
+<!-- Visualization Area -->
+<section class="visualization-section">
+<div class="chart-container">
+<canvas id="mainChart" width="800" height="400"></canvas>
+</div>
+<div class="chart-controls">
+<button class="chart-btn active" data-chart="revenue">Revenue
+Trends</button>
+<button class="chart-btn" data-chart="products">Product
+Performance</button>
+<button class="chart-btn" data-chart="customers">Customer
+Analytics</button>
+<button class="chart-btn" data-chart="regions">Regional Data</button>
+</div>
+</section>
+</div>
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+<div class="loading-content">
+<div class="loading-spinner"></div>
+<h3>AI is Analyzing Your Data</h3>
+<p id="loadingStatus">Processing your query...</p>
+<div class="loading-steps">
+<div class="step" id="step1">📊 Loading data</div>
+<div class="step" id="step2">🤖 AI analysis</div>
+<div class="step" id="step3">📈 Generating insights</div>
+</div>
+</div>
+</div>
+<script type="module" src="scripts/data-processor.js"></script>
+<script type="module" src="scripts/ai-integration.js"></script>
+<script type="module" src="scripts/main.js"></script>
+</body>
+</html>

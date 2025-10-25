@@ -1,0 +1,45 @@
+{
+    "revenue": {
+    "monthly": [
+    {"month": "Jan", "value": 185000, "growth": 8.2},
+    {"month": "Feb", "value": 198000, "growth": 7.0},
+    {"month": "Mar", "value": 215000, "growth": 8.6},
+    {"month": "Apr", "value": 232000, "growth": 7.9},
+    {"month": "May", "value": 248000, "growth": 6.9},
+    {"month": "Jun", "value": 267000, "growth": 7.7}
+    ],
+    "quarterly": {
+    "Q1": 598000,
+    "Q2": 747000,
+    "growth": 24.9
+    }
+    },
+    "products": [
+    {"name": "Premium Analytics", "revenue": 450000, "units": 1200, "growth": 15.3},
+    {"name": "Basic Dashboard", "revenue": 320000, "units": 2400, "growth": 8.7},
+    {"name": "Enterprise Suite", "revenue": 580000, "units": 145, "growth": 22.1},
+    {"name": "Mobile App", "revenue": 180000, "units": 3600, "growth": -2.3}
+    ],
+    "customers": {
+    "total": 15847,
+    "new_monthly": 1247,
+    "churn_rate": 3.2,
+    "satisfaction": 4.7,
+    "segments": [
+    {"name": "Enterprise", "count": 145, "revenue": 580000, "satisfaction": 4.9},
+    {"name": "Mid-Market", "count": 1200, "revenue": 450000, "satisfaction": 4.7},
+    {"name": "Small Business", "count": 14502, "revenue": 315000, "satisfaction": 4.6}
+    ]
+    },
+    "regions": [
+    {"name": "North America", "revenue": 756000, "customers": 8234, "growth": 12.4},
+    {"name": "Europe", "revenue": 432000, "customers": 4521, "growth": 18.7},
+    {"name": "Asia Pacific", "revenue": 287000, "customers": 2156, "growth": 25.3},
+    {"name": "Latin America", "revenue": 125000, "customers": 936, "growth": 8.9}
+    ],
+    "trends": {
+    "top_growing_segments": ["Enterprise", "Asia Pacific", "Premium Analytics"],
+    "concerning_trends": ["Mobile App decline", "Small Business churn"],
+    "opportunities": ["European expansion", "Enterprise upselling", "API products"]
+    }
+    }
