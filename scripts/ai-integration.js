@@ -225,11 +225,24 @@ class AIAnalyzer {
     }
     }
     getConversationContext() {
-    return this.conversationHistory
-    .slice(-3) // Last 3 interactions for context
-    .map(item => `Q: ${item.query}\nA: ${item.response.summary}`)
-    .join('\n\n');
+        return this.conversationHistory
+        .slice(-3) // Last 3 interactions for context
+        .map(item => `Q: ${item.query}\nA: ${item.response.summary}`)
+        .join('\n\n');
     }
+    
+    // Method to manually set API key (for testing)
+    setApiKey(key) {
+        this.groqApiKey = key;
+        console.log('API key updated');
     }
-    // Initialize AI analyzer
-    const aiAnalyzer = new AIAnalyzer();
+}
+
+// Initialize AI analyzer
+const aiAnalyzer = new AIAnalyzer();
+
+// Add global method for testing
+window.setApiKey = function(key) {
+    aiAnalyzer.setApiKey(key);
+    console.log('API key set via window.setApiKey()');
+};
