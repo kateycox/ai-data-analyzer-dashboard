@@ -41,34 +41,53 @@ class BusinessIntelligenceDashboard {
     });
     }
     async handleAnalysis() {
-    if (this.isAnalyzing) return;
-    const query = document.getElementById('queryInput').value.trim();
-    if (!query) {
-    this.showNotification('Please enter a question to analyze', 'warning');
-    return;
-    }
-    this.isAnalyzing = true;
-    this.showLoadingState();
-    try {
-    // Process query with data processor
-    const dataContext = dataProcessor.processQuery(query);
-    // Get AI insights
-    const aiAnalysis = await aiAnalyzer.analyzeQuery(query, dataContext);
-    // Display results
-    this.displayAnalysisResults(aiAnalysis, dataContext);
-    // Add to conversation history
-    aiAnalyzer.addToHistory(query, aiAnalysis);
-    // Update chart if relevant
-    if (dataContext && dataContext.chartType) {
-    this.updateChartWithData(dataContext);
-    }
-    } catch (error) {
-    console.error('Analysis error:', error);
-    this.showErrorState('Analysis failed. Please try again.');
-    } finally {
-    this.isAnalyzing = false;
-    this.hideLoadingState();
-    }
+        if (this.isAnalyzing) return;
+        const query = document.getElementById('queryInput').value.trim();
+        if (!query) {
+            this.showNotification('Please enter a question to analyze', 'warning');
+            return;
+        }
+        
+        console.log('Starting analysis for query:', query);
+        this.isAnalyzing = true;
+        this.showLoadingState();
+        
+        try {
+            // Check if required objects exist
+            if (typeof dataProcessor === 'undefined') {
+                throw new Error('Data processor not loaded');
+            }
+            if (typeof aiAnalyzer === 'undefined') {
+                throw new Error('AI analyzer not loaded');
+            }
+            
+            // Process query with data processor
+            console.log('Processing query with data processor...');
+            const dataContext = dataProcessor.processQuery(query);
+            console.log('Data context:', dataContext);
+            
+            // Get AI insights
+            console.log('Getting AI analysis...');
+            const aiAnalysis = await aiAnalyzer.analyzeQuery(query, dataContext);
+            console.log('AI analysis result:', aiAnalysis);
+            
+            // Display results
+            this.displayAnalysisResults(aiAnalysis, dataContext);
+            
+            // Add to conversation history
+            aiAnalyzer.addToHistory(query, aiAnalysis);
+            
+            // Update chart if relevant
+            if (dataContext && dataContext.chartType) {
+                this.updateChartWithData(dataContext);
+            }
+        } catch (error) {
+            console.error('Analysis error:', error);
+            this.showErrorState(`Analysis failed: ${error.message}`);
+        } finally {
+            this.isAnalyzing = false;
+            this.hideLoadingState();
+        }
     }
     displayAnalysisResults(aiAnalysis, dataContext) {
     const resultsContainer = document.getElementById('resultsContainer');

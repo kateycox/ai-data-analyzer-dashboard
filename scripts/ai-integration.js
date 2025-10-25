@@ -1,17 +1,38 @@
 // AI Integration for Natural Language Processing
-import dotenv from 'dotenv';
-dotenv.config();
-
 class AIAnalyzer {
     constructor() {
-        // Load API key from environment variable
-        this.groqApiKey = process.env.GROK_API_KEY;
-        if (!this.groqApiKey) {
-            console.error('GROK_API_KEY not found in environment variables. Please set it in your .env file.');
-            throw new Error('GROK_API_KEY is required');
-        }
+        // Load API key from environment variable or fallback
+        this.groqApiKey = this.getApiKey();
         this.groqUrl = 'https://api.groq.com/openai/v1/chat/completions';
         this.conversationHistory = [];
+    }
+    
+    getApiKey() {
+        // Try to get API key from various sources
+        // 1. Check if it's set as a global variable (for development)
+        if (typeof window !== 'undefined' && window.GROK_API_KEY) {
+            return window.GROK_API_KEY;
+        }
+        
+        // 2. Check localStorage (for development)
+        if (typeof localStorage !== 'undefined') {
+            const storedKey = localStorage.getItem('GROK_API_KEY');
+            if (storedKey && storedKey !== 'your_grok_api_key_here') {
+                return storedKey;
+            }
+        }
+        
+        // 3. Check if envLoader is available and has the key
+        if (typeof envLoader !== 'undefined') {
+            const envKey = envLoader.get('GROK_API_KEY');
+            if (envKey && envKey !== 'your_grok_api_key_here') {
+                return envKey;
+            }
+        }
+        
+        // 4. Fallback - use placeholder that will cause a clear error
+        console.warn('GROK_API_KEY not found. Please set your API key in the .env file or as window.GROK_API_KEY');
+        return 'YOUR_GROK_API_KEY_HERE';
     }
     async analyzeQuery(query, dataContext) {
     try {
@@ -46,12 +67,19 @@ class AIAnalyzer {
     provide specific metrics and percentages where relevant.`;
     }
     async callGroqAPI(prompt) {
-    const response = await fetch(this.groqUrl, {
-    method: 'POST',
-    headers: {
-    'Authorization': `Bearer ${this.groqApiKey}`,
-    'Content-Type': 'application/json'
-    },
+        // Debug: Check if API key is properly loaded
+        if (this.groqApiKey === 'YOUR_GROK_API_KEY_HERE') {
+            throw new Error('API key not configured. Please set GROK_API_KEY in your .env file.');
+        }
+        
+        console.log('Making API call to Groq with key:', this.groqApiKey.substring(0, 10) + '...');
+        
+        const response = await fetch(this.groqUrl, {
+        method: 'POST',
+        headers: {
+        'Authorization': `Bearer ${this.groqApiKey}`,
+        'Content-Type': 'application/json'
+        },
     body: JSON.stringify({
     model: 'mixtral-8x7b-32768',
     messages: [
